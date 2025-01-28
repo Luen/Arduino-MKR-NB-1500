@@ -85,3 +85,4 @@ The repsonse should be `+CCLK: "25/01/28,12:01:53+40"` `OK`.
 - [u-blox-CEL_ATCommands_(UBX-13002752).pdf](https://github.com/Luen/Arduino-MKR-NB-1500/u-blox-CEL_ATCommands_(UBX-13002752).pdf)
 - [Device Network Settings for Australia](https://support.digitalmatter.com/en_US/lte-mnb-iot/australia-suggested-4g-settings)
 - [Telstra Arduino MKR NB 1500 Mosquitto](https://github.com/telstra/arduino-mkr-nb-1500-mosquitto)
+- [Connect to secure MQTT broker](https://portal.u-blox.com/s/question/0D52p00009AblwoCAB/how-do-you-configure-sara-r4-to-connect-to-secure-mqtt-broker)
