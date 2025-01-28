@@ -45,9 +45,20 @@ Sets the module to automatically select the network operator. `OK` confirms the 
 
 **Check signal strength:** `AT+CSQ` will respond `+CSQ: <rssi>,<ber>`. The `<rssi>` value should be between 10-31 for a good signal. Values below 10 indicate poor signal strength.
 
+**Check and Set MNO Profile:** `AT+UMNOPROF=100`
+Profiles:
+
+`0`: Factory default
+
+`100`: Telstra (Australia) 
+
+After setting the profile, restart the module with: `AT+CFUN=15`
+
 **Change Radio Access Technology (RAT):**
 
 Use the [ChooseRadioAccessTechnology Arduino example](https://github.com/Luen/Arduino-MKR-NB-1500/tree/main/ChooseRadioAccessTechnology) which uses these commands:
+
+NOTE: You may need to Set MNO Profile (see above) for this to be successful. Also note that the example doesn't show if it errored.
 
 Disconnect from the network: `AT+COPS=2`
 
