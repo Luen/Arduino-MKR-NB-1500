@@ -69,6 +69,7 @@ Options:
 `8` for NB-IoT only.
 `7,8` for CAT-M1 preferred, NB-IoT as failover.
 `8,7` for NB-IoT preferred, CAT-M1 as failover.
+
 Apply changes and restart the modem:  `AT+CFUN=15`
 
 **Network registration status:**
@@ -87,7 +88,7 @@ The repsonse should be `+CCLK: "25/01/28,12:01:53+40"` `OK`.
 
 **Disconnect from the network:** `AT+COPS=2`
 
-**Reset the Module:** AT+CFUN=15
+**Reset the Module:** `AT+CFUN=15`
 
 ## Resources
 
