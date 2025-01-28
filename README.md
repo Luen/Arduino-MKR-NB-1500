@@ -35,6 +35,14 @@ AT+CSQ
 The response will be in the format `+CSQ: <rssi>,<ber>`. The `<rssi>` value should be between 10-31 for a good signal. Values below 10 indicate poor signal strength.
 If it's not connected to/registered on the network, `AT+CSQ` will respond `+CSQ: 99,99` `OK`. If you've just changed the setting, wait at least 2 minutes.
 
+You can check the network registation using `AT+CEREG?`.
+
+`+CEREG: 0,1` registered, home network.
+
+`+CEREG: 0,2` the module is searching for a network.
+
+`+CEREG: 0,5` registered, roaming.
+
 ## Configuration:
 
 **Automatically select the network operator:** `AT+COPS=0`
