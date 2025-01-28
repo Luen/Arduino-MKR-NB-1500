@@ -8,9 +8,9 @@ The MKR NB 1500 includes a built-in Li-Po battery charger, allowing it to switch
 
 Compatible with the Arduino IoT Cloud, the MKR NB 1500 simplifies secure remote monitoring and control. Developers can also use a variety of MKR family shields to expand functionality, such as adding GPS, Ethernet, or environmental sensing capabilities. A microSIM card is required for cellular connectivity.
 
-## Set up
+## Set Up
 
-1 .Install the board and MKRNB libary in Arduino IDE.
+1. Install the board and MKRNB libary in Arduino IDE.
 
 2. Flash the SerialSARAPassthrough example onto the board.
 
@@ -43,22 +43,23 @@ Sets the module to automatically select the network operator. `OK` confirms the 
 
 **Check the current network operator:** `AT+COPS?` and responds `+COPS: 0,0,"Telstra Telstra",7` `OK` with the 7 meaning CAT-M1 (LTE-M) and 8 meaning NB-IoT.
 
+**Check signal strength:** `AT+CSQ` will respond `+CSQ: <rssi>,<ber>`. The `<rssi>` value should be between 10-31 for a good signal. Values below 10 indicate poor signal strength.
 
-**Commands in the Code to Change Radio Access Technology (RAT):**
+**Change Radio Access Technology (RAT):**
+
+Use the [ChooseRadioAccessTechnology Arduino example](https://github.com/Luen/Arduino-MKR-NB-1500/tree/main/ChooseRadioAccessTechnology) which uses these commands:
 
 Disconnect from the network: `AT+COPS=2`
 
-Set Radio Access Technology (RAT): `AT+URAT=<choice>`
+Set Radio Access Technology (RAT): `AT+URAT=8`
 
-<choice> is the RAT:
+Options:
 `7` for CAT-M1 only
 `8` for NB-IoT only
 `7,8` for CAT-M1 preferred, NB-IoT as failover
 `8,7` for NB-IoT preferred, CAT-M1 as failover
 
 Apply changes and restart the modem:  `AT+CFUN=15`
-
-Alternatively use the [ChooseRadioAccessTechnology Arduino example](https://github.com/Luen/Arduino-MKR-NB-1500/tree/main/ChooseRadioAccessTechnology)
 
 **Network registration status:**
 `AT+CEREG?` responds `+CEREG: 0,1`
@@ -67,12 +68,7 @@ Alternatively use the [ChooseRadioAccessTechnology Arduino example](https://gith
 
 **Power saving mode:** `AT+UPSV?` responds `+UPSV: 0` means power saving mode is disabled.
 
-**Set current time:**
-
-```bash
-AT+CCLK="25/01/28,12:01:53+40"
-```
-
+**Set current time:** `AT+CCLK="25/01/28,12:01:53+40"`
 The response should be `OK`.
 To check the time, use `AT+CCLK?`.
 The repsonse should be `+CCLK: "25/01/28,12:01:53+40"` `OK`.
