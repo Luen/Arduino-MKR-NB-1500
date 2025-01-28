@@ -65,11 +65,10 @@ Disconnect from the network: `AT+COPS=2`
 Set Radio Access Technology (RAT): `AT+URAT=8`
 
 Options:
-`7` for CAT-M1 only
-`8` for NB-IoT only
-`7,8` for CAT-M1 preferred, NB-IoT as failover
-`8,7` for NB-IoT preferred, CAT-M1 as failover
-
+`7` for CAT-M1 only.
+`8` for NB-IoT only.
+`7,8` for CAT-M1 preferred, NB-IoT as failover.
+`8,7` for NB-IoT preferred, CAT-M1 as failover.
 Apply changes and restart the modem:  `AT+CFUN=15`
 
 **Network registration status:**
