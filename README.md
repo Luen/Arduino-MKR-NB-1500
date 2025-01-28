@@ -10,22 +10,20 @@ Compatible with the Arduino IoT Cloud, the MKR NB 1500 simplifies secure remote 
 
 ## Set up
 
-Install the board and MKRNB libary in Arduino IDE.
+1 .Install the board and MKRNB libary in Arduino IDE.
 
-Flash the SerialSARAPassthrough example onto the board.
+2. Flash the SerialSARAPassthrough example onto the board.
 
-Download the [M-Center software](https://www.u-blox.com/en/product/m-center), run, and then connect the board to the [M-Center software](https://content.u-blox.com/sites/default/files/2024-11/m-center_02.10.00.exe) with sketch's default board rate which is 9600 `CONNECT|COM6|9600|Data bits:8|Parity:none|Stop bits:1|Flow ctrl:hardware`
+3. Download the [M-Center software](https://www.u-blox.com/en/product/m-center), run, and then connect the board to the [M-Center software](https://content.u-blox.com/sites/default/files/2024-11/m-center_02.10.00.exe) with sketch's default board rate which is 9600 `CONNECT|COM6|9600|Data bits:8|Parity:none|Stop bits:1|Flow ctrl:hardware`
 
-APN Configuration:
-Set the correct APN for Telstra. For LTE-M/NB-IoT, use:
-
+4. APN Configuration: Set the correct APN for Telstra. For LTE-M/NB-IoT, use:
 ```bash
 AT+CGDCONT=1,"IP","telstra.iot"
 ```
 
 The response should be `OK`.
 
-Reset the board by disconecting from the software and reseting the board.
+It can take 2 minutes for the board to connect to the network.
 
 Note, signal strength is crucial for establishing a connection. You can check the signal strength with the following AT command:
 
@@ -34,9 +32,42 @@ AT+CSQ
 ```
 
 The response will be in the format `+CSQ: <rssi>,<ber>`. The `<rssi>` value should be between 10-31 for a good signal. Values below 10 indicate poor signal strength.
-If it's not registered on the network, `AT+CSQ` will respond `+CSQ: 99,99` `OK`.
+If it's not connected to/registered on the network, `AT+CSQ` will respond `+CSQ: 99,99` `OK`. If you've just changed the setting, wait at least 2 minutes.
 
-Set current time:
+## Configuration:
+
+**Automatically select the network operator:** `AT+COPS=0`
+Sets the module to automatically select the network operator. `OK` confirms the setting.
+
+**Manually Attempt Network Registration** and try to register with Telstra's network: `AT+COPS=1,2,"50501"`
+
+**Check the current network operator:** `AT+COPS?` and responds `+COPS: 0,0,"Telstra Telstra",7` `OK` with the 7 meaning CAT-M1 (LTE-M) and 8 meaning NB-IoT.
+
+
+**Commands in the Code to Change Radio Access Technology (RAT):**
+
+Disconnect from the network: `AT+COPS=2`
+
+Set Radio Access Technology (RAT): `AT+URAT=<choice>`
+
+<choice> is the RAT:
+`7` for CAT-M1 only
+`8` for NB-IoT only
+`7,8` for CAT-M1 preferred, NB-IoT as failover
+`8,7` for NB-IoT preferred, CAT-M1 as failover
+
+Apply changes and restart the modem:  `AT+CFUN=15`
+
+Alternatively use the [ChooseRadioAccessTechnology Arduino example](https://github.com/Luen/Arduino-MKR-NB-1500/tree/main/ChooseRadioAccessTechnology)
+
+**Network registration status:**
+`AT+CEREG?` responds `+CEREG: 0,1`
+
+**SIM card status:** `AT+CPIN?` responds `+CPIN: READY` confirming the SIM card is unlocked and ready.
+
+**Power saving mode:** `AT+UPSV?` responds `+UPSV: 0` means power saving mode is disabled.
+
+**Set current time:**
 
 ```bash
 AT+CCLK="25/01/28,12:01:53+40"
@@ -45,6 +76,12 @@ AT+CCLK="25/01/28,12:01:53+40"
 The response should be `OK`.
 To check the time, use `AT+CCLK?`.
 The repsonse should be `+CCLK: "25/01/28,12:01:53+40"` `OK`.
+
+**Check for Supported AT Commands:** `AT+CLAC`
+
+**Disconnect from the network:** `AT+COPS=2`
+
+**Reset the Module:** AT+CFUN=15
 
 ## Resources
 
