@@ -17,6 +17,7 @@ Compatible with the Arduino IoT Cloud, the MKR NB 1500 simplifies secure remote 
 3. Download the [M-Center software](https://www.u-blox.com/en/product/m-center), run, and then connect the board to the [M-Center software](https://content.u-blox.com/sites/default/files/2024-11/m-center_02.10.00.exe) with sketch's default board rate which is 9600 `CONNECT|COM6|9600|Data bits:8|Parity:none|Stop bits:1|Flow ctrl:hardware`
 
 4. APN Configuration: Set the correct APN for Telstra. For LTE-M/NB-IoT, use:
+
 ```bash
 AT+CGDCONT=1,"IP","telstra.iot"
 ```
@@ -46,6 +47,7 @@ Sets the module to automatically select the network operator. `OK` confirms the 
 **Check signal strength:** `AT+CSQ` will respond `+CSQ: <rssi>,<ber>`. The `<rssi>` value should be between 10-31 for a good signal. Values below 10 indicate poor signal strength.
 
 **Check and Set MNO Profile:** `AT+UMNOPROF=100`
+
 Profiles:
 
 `0`: Factory default
